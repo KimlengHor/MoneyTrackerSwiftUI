@@ -9,16 +9,38 @@ import SwiftUI
 
 struct AddCardForm: View {
     
+    let card: Card?
+    
+    init(card: Card? = nil) {
+        self.card = card
+        
+        _name = State(initialValue: self.card?.name ?? "")
+        _cardNumber = State(initialValue: self.card?.number ?? "")
+        
+        if let limit = self.card?.limit {
+            _limit = State(initialValue: String(limit))
+        }
+        
+        _cardType = State(initialValue: self.card?.type ?? "Visa")
+        
+        _month = State(initialValue: Int(self.card?.expMonth ?? 1))
+        _currentYear = State(initialValue: Int(self.card?.expYear ?? Int16(Calendar.current.component(.year, from: Date()))))
+        
+        if let colorData = self.card?.color, let uiColor = UIColor.color(data: colorData) {
+            _color = State(initialValue: Color(uiColor: uiColor))
+        }
+    }
+    
     @Environment(\.presentationMode) var presentationMode
     
     @State private var name = ""
     @State private var cardNumber = ""
     @State private var limit = ""
     
-    @State private var cardType = "Visa"
+    @State private var cardType = ""
     
-    @State private var month = 1
-    @State private var currentYear = Calendar.current.component(.year, from: Date())
+    @State private var month = 0
+    @State private var currentYear = 0
     
     @State private var color = Color.blue
     
@@ -55,19 +77,59 @@ struct AddCardForm: View {
                 }
                 
             }
-            .navigationTitle("Add credit card")
-            .navigationBarItems(leading: Button(action: {
-                presentationMode.wrappedValue.dismiss()
-            }, label: {
-                Text("Cancel")
-            }))
-            
+            .navigationTitle(self.card != nil ? (self.card?.name ?? "") : "Add credit card")
+            .navigationBarItems(leading: cancelButton, trailing: saveButton)
         }
+    }
+    
+    private var cancelButton: some View {
+        Button(action: {
+            presentationMode.wrappedValue.dismiss()
+        }, label: {
+            Text("Cancel")
+        })
+    }
+    
+    private var saveButton: some View {
+        Button(action: {
+            let viewContext = PersistenceController.shared.container.viewContext
+            
+            let card = self.card != nil ? self.card! : Card(context: viewContext)
+            
+            card.name = self.name
+            card.number = self.cardNumber
+            card.limit = Int32(self.limit) ?? 0
+            card.type = self.cardType
+            card.expMonth = Int16(self.month)
+            card.expYear = Int16(self.currentYear)
+            card.timestamp = Date()
+            card.color = UIColor(self.color).encode()
+            
+            do {
+                try viewContext.save()
+                presentationMode.wrappedValue.dismiss()
+            } catch {
+                print("Failed to persist new card")
+            }
+            
+        }, label: {
+            Text("Save")
+        })
     }
 }
 
 struct AddCardForm_Previews: PreviewProvider {
     static var previews: some View {
         AddCardForm()
+    }
+}
+
+extension UIColor {
+    class func color(data: Data) -> UIColor? {
+        return try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? UIColor
+    }
+    
+    func encode() -> Data? {
+        return try? NSKeyedArchiver.archivedData(withRootObject: self, requiringSecureCoding: false)
     }
 }
