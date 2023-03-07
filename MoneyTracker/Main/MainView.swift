@@ -11,6 +11,8 @@ struct MainView: View {
     
     @State private var shouldPresentAddCardForm = false
     
+    @State private var selectedCardHash = -1
+    
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(
@@ -24,23 +26,35 @@ struct MainView: View {
                 if cards.isEmpty {
                     emptyPromptMessage
                 } else {
-                    TabView {
+                    
+                    TabView(selection: $selectedCardHash) {
                         ForEach(cards) { card in
                             CreditCardView(card: card)
                                 .padding(.bottom, 50)
+                                .tag(card.hash)
                         }
                     }
                     .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
                     .frame(height: 300)
                     .indexViewStyle(.page(backgroundDisplayMode: .always))
+                    .onAppear {
+                        self.selectedCardHash = cards.first?.hash ?? -1
+                    }
+                    
+                    if let firstIndex = cards.firstIndex(where: {$0.hash == selectedCardHash}) {
+                        let card = self.cards[firstIndex]
+                        Text(card.name ?? "")
+                        TransactionsListView(card: card)
+                    }
                 }
                 
                 Spacer()
                     .fullScreenCover(isPresented: $shouldPresentAddCardForm) {
-                        AddCardForm()
+                        AddCardForm(card: nil) { card in
+                            self.selectedCardHash = card.hash
+                        }
                     }
             }
-            
             .navigationTitle("Credit Cards")
             .navigationBarItems(leading: HStack {
                 addItemButton
