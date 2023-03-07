@@ -18,6 +18,8 @@
 		713F604D29B0040600FB22B1 /* MoneyTrackerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713F604C29B0040600FB22B1 /* MoneyTrackerUITestsLaunchTests.swift */; };
 		713F605D29B0050200FB22B1 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713F605C29B0050200FB22B1 /* MainView.swift */; };
 		713F606029B0120A00FB22B1 /* AddCardForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713F605F29B0120A00FB22B1 /* AddCardForm.swift */; };
+		713F606729B1397400FB22B1 /* AddTransactionForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713F606629B1397400FB22B1 /* AddTransactionForm.swift */; };
+		71A9CB5529B7A2F7000AD1BC /* TransactionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A9CB5429B7A2F7000AD1BC /* TransactionsListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +54,8 @@
 		713F604C29B0040600FB22B1 /* MoneyTrackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyTrackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		713F605C29B0050200FB22B1 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		713F605F29B0120A00FB22B1 /* AddCardForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardForm.swift; sourceTree = "<group>"; };
+		713F606629B1397400FB22B1 /* AddTransactionForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionForm.swift; sourceTree = "<group>"; };
+		71A9CB5429B7A2F7000AD1BC /* TransactionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,18 +145,28 @@
 		713F605929B004AD00FB22B1 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				713F605E29B011F800FB22B1 /* AddCard */,
+				713F606529B1395700FB22B1 /* Transaction */,
+				713F605E29B011F800FB22B1 /* Card */,
 				713F605C29B0050200FB22B1 /* MainView.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
 		};
-		713F605E29B011F800FB22B1 /* AddCard */ = {
+		713F605E29B011F800FB22B1 /* Card */ = {
 			isa = PBXGroup;
 			children = (
 				713F605F29B0120A00FB22B1 /* AddCardForm.swift */,
 			);
-			path = AddCard;
+			path = Card;
+			sourceTree = "<group>";
+		};
+		713F606529B1395700FB22B1 /* Transaction */ = {
+			isa = PBXGroup;
+			children = (
+				713F606629B1397400FB22B1 /* AddTransactionForm.swift */,
+				71A9CB5429B7A2F7000AD1BC /* TransactionsListView.swift */,
+			);
+			path = Transaction;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,7 +302,9 @@
 				713F603429B0040500FB22B1 /* Persistence.swift in Sources */,
 				713F606029B0120A00FB22B1 /* AddCardForm.swift in Sources */,
 				713F603729B0040500FB22B1 /* MoneyTracker.xcdatamodeld in Sources */,
+				713F606729B1397400FB22B1 /* AddTransactionForm.swift in Sources */,
 				713F602D29B0040100FB22B1 /* ContentView.swift in Sources */,
+				71A9CB5529B7A2F7000AD1BC /* TransactionsListView.swift in Sources */,
 				713F605D29B0050200FB22B1 /* MainView.swift in Sources */,
 				713F602B29B0040100FB22B1 /* MoneyTrackerApp.swift in Sources */,
 			);
