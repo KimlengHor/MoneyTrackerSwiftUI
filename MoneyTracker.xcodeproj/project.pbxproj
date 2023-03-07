@@ -20,6 +20,7 @@
 		713F606029B0120A00FB22B1 /* AddCardForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713F605F29B0120A00FB22B1 /* AddCardForm.swift */; };
 		713F606729B1397400FB22B1 /* AddTransactionForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713F606629B1397400FB22B1 /* AddTransactionForm.swift */; };
 		71A9CB5529B7A2F7000AD1BC /* TransactionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A9CB5429B7A2F7000AD1BC /* TransactionsListView.swift */; };
+		71AB062329B7C57300E2DCEA /* CatagoriesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AB062229B7C57300E2DCEA /* CatagoriesListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		713F605F29B0120A00FB22B1 /* AddCardForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardForm.swift; sourceTree = "<group>"; };
 		713F606629B1397400FB22B1 /* AddTransactionForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionForm.swift; sourceTree = "<group>"; };
 		71A9CB5429B7A2F7000AD1BC /* TransactionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsListView.swift; sourceTree = "<group>"; };
+		71AB062229B7C57300E2DCEA /* CatagoriesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatagoriesListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +167,7 @@
 			children = (
 				713F606629B1397400FB22B1 /* AddTransactionForm.swift */,
 				71A9CB5429B7A2F7000AD1BC /* TransactionsListView.swift */,
+				71AB062229B7C57300E2DCEA /* CatagoriesListView.swift */,
 			);
 			path = Transaction;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				713F603429B0040500FB22B1 /* Persistence.swift in Sources */,
+				71AB062329B7C57300E2DCEA /* CatagoriesListView.swift in Sources */,
 				713F606029B0120A00FB22B1 /* AddCardForm.swift in Sources */,
 				713F603729B0040500FB22B1 /* MoneyTracker.xcdatamodeld in Sources */,
 				713F606729B1397400FB22B1 /* AddTransactionForm.swift in Sources */,
