@@ -20,49 +20,138 @@ struct TransactionsListView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     @State private var shouldShowTransactionForm = false
+    @State private var shouldShowFilterSheet = false
+    
+    @State var selectedCategories = Set<TransactionCategory>()
     
     var fetchRequest: FetchRequest<CardTransaction>
     
     var body: some View {
         VStack {
-            Text("Get started by adding your first transaction")
-            Button {
-                shouldShowTransactionForm.toggle()
-            } label: {
-                Text("+ Transaction")
-                    .padding(EdgeInsets(top: 10, leading: 14, bottom: 10, trailing: 14))
-                    .background(Color(.label))
-                    .foregroundColor(Color(.systemBackground))
-                    .cornerRadius(5)
-                    .font(.headline)
+            if fetchRequest.wrappedValue.isEmpty {
+                Text("Get started by adding your first transaction")
+                addTransactionButton
+            } else {
+                HStack {
+                    Spacer()
+                    addTransactionButton
+                    filterButton
+                        .sheet(isPresented: $shouldShowFilterSheet) {
+                            
+                            FilterSheet(didSaveFilter: { categories in
+                                self.selectedCategories = categories
+                            }, selectedCategories: selectedCategories)
+                        }
+                }.padding(.horizontal)
+                
+                ForEach(filterTransactions(selectedCategories: self.selectedCategories)) { transaction in
+                    CardTransactionView(transaction: transaction)
+                }            }
+        }.fullScreenCover(isPresented: $shouldShowTransactionForm) {
+            AddTransactionForm(card: self.card)
+        }
+    }
+    
+    private func filterTransactions(selectedCategories: Set<TransactionCategory>) -> [CardTransaction] {
+        if selectedCategories.isEmpty {
+            return Array(fetchRequest.wrappedValue)
+        }
+        
+        return fetchRequest.wrappedValue.filter { transaction in
+            var shouldKeep = false
+            if let categories = transaction.categories as? Set<TransactionCategory> {
+                categories.forEach({ category in
+                    if selectedCategories.contains(category) {
+                        shouldKeep = true
+                    }
+                })
             }
-            .fullScreenCover(isPresented: $shouldShowTransactionForm) {
-                AddTransactionForm(card: self.card)
+            
+            return shouldKeep
+        }
+    }
+    
+    private var addTransactionButton: some View {
+        Button {
+            shouldShowTransactionForm.toggle()
+        } label: {
+            Text("+ Transaction")
+                .padding(EdgeInsets(top: 10, leading: 14, bottom: 10, trailing: 14))
+                .background(Color(.label))
+                .foregroundColor(Color(.systemBackground))
+                .cornerRadius(5)
+                .font(.headline)
+        }
+    }
+    
+    private var filterButton: some View {
+        Button {
+            shouldShowFilterSheet.toggle()
+        } label: {
+            HStack{
+                Image(systemName: "line.horizontal.3.decrease.circle")
+                Text("+ Filter")
             }
-            ForEach(fetchRequest.wrappedValue) { transaction in
-                CardTransactionView(transaction: transaction)
-            }
+            .padding(EdgeInsets(top: 10, leading: 14, bottom: 10, trailing: 14))
+            .background(Color(.label))
+            .foregroundColor(Color(.systemBackground))
+            .cornerRadius(5)
+            .font(.headline)
         }
     }
 }
 
-struct TransactionsListView_Previews: PreviewProvider {
+struct FilterSheet: View {
     
-    static let firstCard: Card? = {
-        let context = PersistenceController.shared.container.viewContext
-        let request = Card.fetchRequest()
-        request.sortDescriptors = [.init(key: "timestamp", ascending: false)]
-        return try? context.fetch(request).first
-    }()
+    let didSaveFilter: (Set<TransactionCategory>) -> ()
     
-    static var previews: some View {
-        let context = PersistenceController.shared.container.viewContext
-        ScrollView {
-            if let card = firstCard {
-                TransactionsListView(card: card)
-                    .environment(\.managedObjectContext, context)
-            }
+    @Environment(\.presentationMode) var presentationMode
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \TransactionCategory.timestamp, ascending: false)],
+        animation: .default)
+    private var categories: FetchedResults<TransactionCategory>
+    @State var selectedCategories: Set<TransactionCategory>
+    
+    var body: some View {
+        NavigationView {
+            Form {
+                ForEach(categories) { category in
+                    Button {
+                        if selectedCategories.contains(category) {
+                            selectedCategories.remove(category)
+                        } else {
+                            selectedCategories.insert(category)
+                        }
+                    } label: {
+                        HStack(spacing: 12) {
+                            if let data = category.colorData, let uiColor = UIColor.color(data: data) {
+                                let color = Color(uiColor: uiColor)
+                                Spacer()
+                                    .frame(width: 30, height: 10)
+                                    .background(color)
+                            }
+                            Text(category.name ?? "")
+                            Spacer()
+                            
+                            if selectedCategories.contains(category) {
+                                Image(systemName: "checkmark")
+                            }
+                        }
+                    }
+                }
+            }.navigationTitle("Select filters")
+                .navigationBarItems(trailing: saveButton)
         }
+    }
+    
+    private var saveButton: some View {
+        Button {
+            didSaveFilter(selectedCategories)
+            presentationMode.wrappedValue.dismiss()
+        } label: {
+            Text("Save")
+        }
+
     }
 }
 
@@ -102,7 +191,7 @@ struct CardTransactionView: View {
                     } label: {
                         Image(systemName: "ellipsis")
                             .font(.system(size: 24))
-                            .foregroundColor(.black)
+                            .foregroundColor(Color(.label))
                     }
                     .padding(EdgeInsets(top: 6, leading: 8, bottom: 4, trailing: 0))
                     .actionSheet(isPresented: $shouldPresentActionSheet) {
@@ -139,7 +228,7 @@ struct CardTransactionView: View {
             }
         }
         .padding()
-        .background(Color.white)
+        .background(Color.cardTransactionBackground)
         .cornerRadius(5)
         .shadow(radius: 5)
         .padding()
@@ -151,4 +240,24 @@ struct CardTransactionView: View {
         formatter.timeStyle = .none
         return formatter
     }()
+}
+
+struct TransactionsListView_Previews: PreviewProvider {
+    
+    static let firstCard: Card? = {
+        let context = PersistenceController.shared.container.viewContext
+        let request = Card.fetchRequest()
+        request.sortDescriptors = [.init(key: "timestamp", ascending: false)]
+        return try? context.fetch(request).first
+    }()
+    
+    static var previews: some View {
+        let context = PersistenceController.shared.container.viewContext
+        NavigationView {
+            if let card = firstCard {
+                TransactionsListView(card: card)
+            }
+        }.colorScheme(.light)
+            .environment(\.managedObjectContext, context)
+    }
 }
