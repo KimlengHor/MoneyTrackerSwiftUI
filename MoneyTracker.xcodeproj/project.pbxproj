@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7129F78029BBA6BB005DF45F /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7129F77F29BBA6BB005DF45F /* Color.swift */; };
 		713F602B29B0040100FB22B1 /* MoneyTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713F602A29B0040100FB22B1 /* MoneyTrackerApp.swift */; };
 		713F602D29B0040100FB22B1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713F602C29B0040100FB22B1 /* ContentView.swift */; };
 		713F602F29B0040500FB22B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 713F602E29B0040500FB22B1 /* Assets.xcassets */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7129F77F29BBA6BB005DF45F /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		713F602729B0040100FB22B1 /* MoneyTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoneyTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		713F602A29B0040100FB22B1 /* MoneyTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyTrackerApp.swift; sourceTree = "<group>"; };
 		713F602C29B0040100FB22B1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -85,6 +87,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7129F77E29BBA6AD005DF45F /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				7129F77F29BBA6BB005DF45F /* Color.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		713F601E29B0040100FB22B1 = {
 			isa = PBXGroup;
 			children = (
@@ -147,6 +157,7 @@
 		713F605929B004AD00FB22B1 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				7129F77E29BBA6AD005DF45F /* Utils */,
 				713F606529B1395700FB22B1 /* Transaction */,
 				713F605E29B011F800FB22B1 /* Card */,
 				713F605C29B0050200FB22B1 /* MainView.swift */,
@@ -305,6 +316,7 @@
 				713F603429B0040500FB22B1 /* Persistence.swift in Sources */,
 				71AB062329B7C57300E2DCEA /* CatagoriesListView.swift in Sources */,
 				713F606029B0120A00FB22B1 /* AddCardForm.swift in Sources */,
+				7129F78029BBA6BB005DF45F /* Color.swift in Sources */,
 				713F603729B0040500FB22B1 /* MoneyTracker.xcdatamodeld in Sources */,
 				713F606729B1397400FB22B1 /* AddTransactionForm.swift in Sources */,
 				713F602D29B0040100FB22B1 /* ContentView.swift in Sources */,
