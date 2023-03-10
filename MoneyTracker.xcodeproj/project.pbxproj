@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7129F78029BBA6BB005DF45F /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7129F77F29BBA6BB005DF45F /* Color.swift */; };
+		7129F78229BBAE7C005DF45F /* DeviceIdiomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7129F78129BBAE7C005DF45F /* DeviceIdiomView.swift */; };
+		7129F78429BBB3BD005DF45F /* MainPadDeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7129F78329BBB3BD005DF45F /* MainPadDeviceView.swift */; };
 		713F602B29B0040100FB22B1 /* MoneyTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713F602A29B0040100FB22B1 /* MoneyTrackerApp.swift */; };
 		713F602D29B0040100FB22B1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713F602C29B0040100FB22B1 /* ContentView.swift */; };
 		713F602F29B0040500FB22B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 713F602E29B0040500FB22B1 /* Assets.xcassets */; };
@@ -43,6 +45,8 @@
 
 /* Begin PBXFileReference section */
 		7129F77F29BBA6BB005DF45F /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		7129F78129BBAE7C005DF45F /* DeviceIdiomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceIdiomView.swift; sourceTree = "<group>"; };
+		7129F78329BBB3BD005DF45F /* MainPadDeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPadDeviceView.swift; sourceTree = "<group>"; };
 		713F602729B0040100FB22B1 /* MoneyTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoneyTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		713F602A29B0040100FB22B1 /* MoneyTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyTrackerApp.swift; sourceTree = "<group>"; };
 		713F602C29B0040100FB22B1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -125,6 +129,7 @@
 				713F603329B0040500FB22B1 /* Persistence.swift */,
 				713F603529B0040500FB22B1 /* MoneyTracker.xcdatamodeld */,
 				713F603029B0040500FB22B1 /* Preview Content */,
+				7129F78129BBAE7C005DF45F /* DeviceIdiomView.swift */,
 			);
 			path = MoneyTracker;
 			sourceTree = "<group>";
@@ -161,6 +166,7 @@
 				713F606529B1395700FB22B1 /* Transaction */,
 				713F605E29B011F800FB22B1 /* Card */,
 				713F605C29B0050200FB22B1 /* MainView.swift */,
+				7129F78329BBB3BD005DF45F /* MainPadDeviceView.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -321,8 +327,10 @@
 				713F606729B1397400FB22B1 /* AddTransactionForm.swift in Sources */,
 				713F602D29B0040100FB22B1 /* ContentView.swift in Sources */,
 				71A9CB5529B7A2F7000AD1BC /* TransactionsListView.swift in Sources */,
+				7129F78229BBAE7C005DF45F /* DeviceIdiomView.swift in Sources */,
 				713F605D29B0050200FB22B1 /* MainView.swift in Sources */,
 				713F602B29B0040100FB22B1 /* MoneyTrackerApp.swift in Sources */,
+				7129F78429BBB3BD005DF45F /* MainPadDeviceView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
